@@ -152,18 +152,19 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    pl.seed_everything(42)
     parser.add_argument('--model_name', type=str, default='prajjwal1/bert-tiny')
     parser.add_argument('--num_labels', type=int, default=2)
-    parser.add_argument('--learning_rate', type=float, default=2e-5*3)
+    parser.add_argument('--learning_rate', type=float, default=2e-5)
     parser.add_argument('--weight_decay', type=float, default=0.01)
-    parser.add_argument('--train_batch_size', type=int, default=16)
+    parser.add_argument('--train_batch_size', type=int, default=16*3)
     parser.add_argument('--eval_batch_size', type=int, default=16)
     parser.add_argument('--max_seq_length', type=int, default=512)
     parser.add_argument('--max_epochs', type=int, default=10)
-    parser.add_argument('--accumulate_grad_batches', type=int, default=1*3)
+    parser.add_argument('--accumulate_grad_batches', type=int, default=1)
+    parser.add_argument('--seed', type=int, default=42)
     args = parser.parse_args()
+    pl.seed_everything(args.seed)
     main(args)
-    #example of a shell command: python train.py --learning_rate 2e-5 --accumulate_grad_batches 1
+    #example of a shell command: python train.py --learning_rate 2e-5 --accumulate_grad_batches 3
     
 
